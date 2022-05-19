@@ -175,11 +175,11 @@ public class InterfazLibreria extends JFrame
 			String textoCreado = "No se crearon nuevas Categorias";
 
 			if (mapaCategoriasNuevas.size() != 0 ){
-				textoCreado = "Las categorias que se crearon fueron:";
+				textoCreado = "Las categorias que se crearon fueron:\n";
 				for (String categoria: mapaCategoriasNuevas.keySet()) {
 					String nombre = categoria;
 					int tamanio = mapaCategoriasNuevas.get(nombre);
-					textoCreado = textoCreado + nombre + "-" + tamanio + "libro(s)" + "\n";
+					textoCreado = textoCreado + nombre + "-" + tamanio + " libro(s)" + "\n";
 				}
 				JOptionPane.showMessageDialog(this, textoCreado);
 			}

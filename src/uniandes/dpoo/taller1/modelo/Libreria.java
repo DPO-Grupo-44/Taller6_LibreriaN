@@ -419,6 +419,14 @@ public class Libreria
 		return cantidad;
 	}
 
+	public void renombrarCategoria(Categoria categoria, String Renombre) throws Exception {
+		if(buscarCategoria(Renombre)==null){
+			categoria.renombrar(Renombre);
+		} else {
+			throw new Exception("Existe una categoria con este nombre");
+		}
+	}
+
 	/**
 	 * Consulta si hay algún autor que tenga un libro en más de una categoría
 	 * 
