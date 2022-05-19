@@ -465,4 +465,50 @@ public class Libreria
 	public HashMap<String, Integer> mapaObjetosCatalogo(){
 		return this.mapaCategorias;
 	}
+	
+	public ArrayList<ArrayList<String>> borrarLibros(String autores){
+		ArrayList<String> autoresnoestan = new ArrayList<String>();
+		ArrayList<String> autoressiestan = new ArrayList<String>();
+		ArrayList<String> total = new ArrayList<String>();
+		ArrayList<ArrayList<String>> resfinal = new ArrayList<ArrayList<String>>();
+		int cantidadlibros = 0;
+		if (autores.contains(",")) {
+			String[] autoresdiv = autores.split(",");
+			for (int i= 0; i < autoresdiv.length; i++) {
+				ArrayList <Libro> res = buscarLibrosAutor(autoresdiv[i]);
+				if (res.isEmpty()) {
+					autoresnoestan.add(autoresdiv[i]);
+				}
+				else {
+					autoressiestan.add(autoresdiv[i]);
+					cantidadlibros += res.size();
+				}
+			}
+		}
+		else {
+			ArrayList <Libro> res = buscarLibrosAutor(autores);
+			if (res.isEmpty()) {
+				autoresnoestan.add(autores);
+			}
+			else {
+				autoressiestan.add(autores);
+				cantidadlibros += res.size();
+			}
+		}
+		String cantString = Integer. toString(cantidadlibros);
+
+		total.add(cantString);
+		resfinal.add(autoresnoestan);
+		resfinal.add(autoressiestan);
+		resfinal.add(total);
+		return resfinal;
+	}
+
+		public void borrarLibro(String libro) {
+		for (int i = 0; i< catalogo.size(); i++) {
+			if (catalogo.get(i).darAutor().equals(libro)) {
+				catalogo.remove(i);
+			}
+		}
+	}
 }

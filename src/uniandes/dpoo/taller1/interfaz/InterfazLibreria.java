@@ -359,7 +359,40 @@ public class InterfazLibreria extends JFrame
 		}
 		JOptionPane.showMessageDialog(this, mensaje, "Consulta", JOptionPane.INFORMATION_MESSAGE);
 	}
-
+	
+	public void borrarLibros()
+	{
+		String autores = JOptionPane.showInputDialog(this, "Escriba los nombres de los autores", "autores");
+		if (autores != null)
+		{
+			ArrayList<ArrayList<String>> listas = libreria.borrarLibros(autores);
+			ArrayList<String> noestan = listas.get(0);
+			ArrayList<String> siestan = listas.get(1);
+			ArrayList<String> cant = listas.get(2);
+			if (noestan.isEmpty()) {
+				for (int i = 0; i < siestan.size(); i++) {
+					libreria.borrarLibro(siestan.get(i));
+					panelLibros.actualizarLibros(libreria.darLibros());
+				}
+				JOptionPane.showMessageDialog(this, "Se han borrado libros en el sistema: " + cant.get(0));
+			}
+			else {
+				String mensaje = "No se han encontrado los siguientes autores:\n";
+				for (String autor : noestan)
+				{
+					mensaje += " " + autor + "\n";
+				}
+				JOptionPane.showMessageDialog(this, mensaje, "No Autores", JOptionPane.INFORMATION_MESSAGE);
+				String mensaje2 = "Los siguientes sí corresponden a autores en la base de datos:\n";
+				for (String author : siestan)
+				{
+					mensaje2 += " " + author + "\n";
+				}
+				JOptionPane.showMessageDialog(this, mensaje2, "Si Autores", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		}
+	}
 	// ************************************************************************
 	// Main
 	// ************************************************************************
