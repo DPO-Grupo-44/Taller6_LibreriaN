@@ -360,6 +360,28 @@ public class InterfazLibreria extends JFrame
 		JOptionPane.showMessageDialog(this, mensaje, "Consulta", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	public void renombrarCategoria(){
+		String nombreActual = JOptionPane.showInputDialog(this, "Escriba el nombre de la categorai que quiera renombrar: ");
+		String nuevoNombre = JOptionPane.showInputDialog(this, "Escriba el nuevo nombre de la categoria " + nombreActual + ":");
+
+		if(nombreActual != null && nuevoNombre != null){
+			Categoria categoria = libreria.buscarCategoria(nombreActual);
+
+			if(categoria != null){
+				try{
+					libreria.renombrarCategoria(categoria, nuevoNombre);
+					String mensajeSalida = "El cambio de nombre para la categoria " + nombreActual + " por " + nuevoNombre + " fue exitoso";
+					JOptionPane.showMessageDialog(this, mensajeSalida, "Categorias", JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception e){
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			} else{
+				JOptionPane.showMessageDialog(this, "No hay ninguna categoria registrada con este nombre", "No hay categoria", JOptionPane.INFORMATION_MESSAGE);
+			}
+
+		}
+	}
+
 	public void borrarLibros()
 	{
 		String autores = JOptionPane.showInputDialog(this, "Escriba los nombres de los autores", "autores");
